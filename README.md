@@ -32,7 +32,7 @@ var pathToItem = '.nav li';
 var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.replace( '#', '' ) } )
 
 var callback = function(obj){
-  var query = 'a[href="#'+obj.name+'"';
+  var query = 'a[href="#'+obj.name+'"]';
   var navItem = document.querySelector( query );
 
   // callback is called only on a trigger change (onlyOnChange: true). Default behavior.

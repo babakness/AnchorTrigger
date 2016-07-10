@@ -1,3 +1,4 @@
+// V0.1
 // API
 // Example:
 // var obj = AnchorTriggre( listOfAnchorNames, callback, [options] )

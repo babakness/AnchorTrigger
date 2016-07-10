@@ -1,3 +1,27 @@
+// API
+// Example:
+// var obj = OnePageNav( listOfAnchorNames, callback, [options] )
+// 
+// listOfAnchorNames // ARRAY || array containing the names of anchors to watch
+// callback // FUNCTION || function to callback when within a certain anchor
+// 
+// options is an obj with the following properties, default value given.
+// {
+//  query: 'a',   // STRING || tags to query as anchors. 
+//                // Could give class, ie. a.foobar would search a tags 
+//                // with class foobar
+//  fraction: .5,  // INTEGER || fraction of page (top to bottom or left to right) 
+//                // to trigger new area.
+//  delay: 50,    // INTEGER || Delay to throttle calls during scroll
+//  
+//  bind: window, // OBJ || The element we are watching for scroll. 
+//                // Pass the element itself, not a string.
+//                
+//  flow: 'top',  // STRING || Direction of scroll flow. Options are 
+//                //   'top'  -- as in top to bottom
+//                //   'left' -- as in left to right
+// } 
+
 var AnchorTrigger = function(anchors, callback, options){
   var self = this;
 

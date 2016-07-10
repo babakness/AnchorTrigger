@@ -7,7 +7,7 @@ The library doesn't have any dependencies and is just 1K when gzipped. The sourc
 
 # Example
 
-See the [example](https://babakness.github.io/AnchorTrigger/example){:target="_blank"} discussed below.
+See the [example](https://babakness.github.io/AnchorTrigger/example) discussed below.
 
 # Usage
 

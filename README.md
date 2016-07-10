@@ -45,7 +45,7 @@ var aTrigger = new AnchorTrigger(anchors,callback);
 
 ```
 
-That's it! :-)
+That's it!  :-)
 
 # API
 

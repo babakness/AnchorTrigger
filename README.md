@@ -81,7 +81,7 @@ Additionally, `option` can be used to fine-tune behavior as needed. This takes a
 listOfAnchorNames // ARRAY || array containing the names of anchors to watch
 callback // FUNCTION || function to callback when within a certain anchor
 
-options is an obj with the following properties, default value given.
+// options is an obj with the following properties, default value given.
 {
  query: 'a',        // STRING || tags to query as anchors. 
                     //   Could give class, ie. a.foobar would search a tags 

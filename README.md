@@ -5,6 +5,10 @@ Its designed to be effecient, for example, callbacks are throttled to 50ms rathe
 
 The library doesn't have any dependencies and is just 1K when gzipped. The source should be pretty straight forward and easy to update. It is written in plain old ES5.
 
+# Example
+
+See the <a herf="https://babakness.github.io/AnchorTrigger/example">example</a> discussed below.
+
 # Usage
 
 A simple use case. Suppose you have a simple navigation menu, such as:

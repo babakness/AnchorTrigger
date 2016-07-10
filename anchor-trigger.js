@@ -1,47 +1,55 @@
 // API
 // Example:
-// var obj = OnePageNav( listOfAnchorNames, callback, [options] )
+// var obj = AnchorTriggre( listOfAnchorNames, callback, [options] )
 // 
 // listOfAnchorNames // ARRAY || array containing the names of anchors to watch
 // callback // FUNCTION || function to callback when within a certain anchor
 // 
 // options is an obj with the following properties, default value given.
 // {
-//  query: 'a',   // STRING || tags to query as anchors. 
-//                // Could give class, ie. a.foobar would search a tags 
-//                // with class foobar
-//  fraction: .5,  // INTEGER || fraction of page (top to bottom or left to right) 
-//                // to trigger new area.
-//  delay: 50,    // INTEGER || Delay to throttle calls during scroll
-//  
-//  bind: window, // OBJ || The element we are watching for scroll. 
-//                // Pass the element itself, not a string.
-//                
-//  flow: 'top',  // STRING || Direction of scroll flow. Options are 
-//                //   'top'  -- as in top to bottom
-//                //   'left' -- as in left to right
+//  query: 'a',        // STRING || tags to query as anchors. 
+//                     //   Could give class, ie. a.foobar would search a tags 
+//                     //   with class foobar
+//                     
+//  onlyOnChange: true // BOOLEAN || Only call callback when anchor has changed.
+//  fraction: .5,      // INTEGER || fraction of page (top to bottom or left to right) 
+//                     //   to trigger new area.
+//  delay: 50,         // INTEGER || Delay to throttle calls during scroll
+//       
+//  bind: window,      // OBJ || The element we are watching for scroll. 
+//                     //   Pass the element itself, not a string.
+//                     
+//  flow: 'top',       // STRING || Direction of scroll flow. Options are 
+//                     //   'top'  -- as in top to bottom
+//                     //   'left' -- as in left to right
+
+//  alwaysCallback: undefined   // FUNCTION || This is a callback that is always 
+//                              //   called even when trigger remains the same.
 // } 
 
 var AnchorTrigger = function( anchors, callback, options ){
   var self = this;
 
   // set default constructor parameters
-  options = options || {}
+  options = options || {};
 
   // set instance attributes
-  self.innerSizeFor = {}
+  self.innerSizeFor = {};
+  self.onlyOnChange = options.onlyOnChange || true;
   self.fraction = options.fraction !== undefined ? options.fraction : .5;
   self.anchorsQuery = options.query || 'a';
-  self.flow = [ 'top','left' ].filter( function( item ){ return options.flow==item } ).lengths || 'top'
+  self.flow = [ 'top','left' ].filter( function( item ){ return options.flow==item } ).lengths || 'top';
   var bindToElement = self.bindToElement = options.bind || window;
   var delay = options.delay || 50;
 
-  self.anchorNames = anchors || []
-  self.callback = callback || function(anchor){console.log('No callback given. Current anchor: '+anchor)}
+  self.lastAnchor = '';
+  self.anchorNames = anchors || [];
+  self.callback = callback || function(){};
+  self.alwaysCallback = options.alwaysCallback || undefined;
   self.query = self.anchorNames
       .map(function(item){
         return self.anchorsQuery+'[name="'+item+'"]'})
-      .join(', ')
+      .join(', ');
 
   //////////////////////////////////
   
@@ -122,12 +130,19 @@ AnchorTrigger.prototype = {
 
 
     var offset = self.innerSizeFor[ self.flow ] * self.fraction;
-    var nav = self.elementPositions
+    var nav = self.elementPositions;
       .filter(function( element ){
-          return element.cumlativePosition[ self.flow ] - offset <= self.scrollPosition[ self.flow ]
+          return element.cumlativePosition[ self.flow ] - offset <= self.scrollPosition[ self.flow ];
         })
       .slice( -1 )[ 0 ]
-    self.callback.call( self,nav )
+    if ( self.lastAnchor !== nav.name ){
+      self.lastAnchor = nav.name;
+      self.calculateElementPositions();
+      self.callback.call( self,nav ); 
+    }
+    if ( self.alwaysCallback ) {
+      self.callback.call( self,nav );
+    }
     // =console.log(elements)
   },
   cumulativeOffset: function( element ) {
@@ -152,7 +167,7 @@ AnchorTrigger.prototype = {
         element: DOMelement, 
         cumlativePosition: self.cumulativeOffset( DOMelement ), 
         scrollPosition: self.scrollPosition 
-      }
+      };
     })
   },
 }

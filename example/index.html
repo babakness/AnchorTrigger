@@ -1,1 +1,207 @@
 <html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+body{
+	margin:0px;
+	padding:0px;
+	color: #555;
+}
+#menu
+{
+  padding:0;
+  margin: 40px 0;
+  list-style-type:none;
+  font-size:20px;
+  color:#555;
+  position: fixed;
+}
+
+#menu li
+{
+  padding:7px 10px 7px 10px;
+  cursor: pointer;
+}
+
+#menu .selected
+{
+  background-color:#ddd;
+}
+a, a:hover
+{
+  color:#555;
+  text-decoration: none;
+}
+
+
+header {
+	font-size: 50px;
+}
+pre {
+	line-height: 1.5em;
+	font-size: 20px;
+	font-family: Raleway,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+article {
+	margin: 2em 0 2em 0;
+	height: 100%;
+}
+
+@media (max-width: 600px) {
+	#menu {
+		position: relative;
+		margin: 0px;
+		position: fixed;
+		background-color: white;
+		width: 100%;
+
+	}
+	ul{
+	}
+	#menu li {
+		padding: 13px;
+		display: table-cell;
+		width: 33%;
+		text-align: center;
+	}
+	header {
+		padding-top: 50px;
+		margin-top: -50px;
+	}
+	div.nine{
+		width: 400px;
+		margin-left: 40px;
+
+	}
+	.three {
+	}
+}
+
+</style>
+</head>
+<body>
+<div class="row">
+<div class="columns three">
+<ul class="nav columns three" id="menu">
+    <li><a href="#one">The Park</a></li>
+    <li><a href="#two">Concord&nbsp;Hymn</a></li>
+    <li><a href="#three">Fable</a></li>
+</ul>
+<a name="one"></a>
+
+<div>&nbsp;</div>
+</div>
+
+<div class="columns nine">
+<article>
+<header>The Park</header>
+
+<pre>
+The prosperous and beautiful
+To me seem not to wear
+The yoke of conscience masterful,
+Which galls me everywhere.
+
+I cannot shake off the god;
+On my neck he makes his seat;
+I look at my face in the glass,
+My eyes his eye-balls meet.
+
+Enchanters! enchantresses!
+Your gold makes you seem wise:
+The morning mist within your grounds
+More proudly rolls, more softly lies.
+
+Yet spake yon purple mountain,
+Yet said yon ancient wood,
+That night or day, that love or crime
+Lead all souls to the Good.
+</pre>
+<address>Ralph Waldo Emerson</address>
+</article>
+ 
+<a name="two"></a>
+<article>
+<header>Concord Hymn</header>
+
+<pre>
+By the rude bridge that arched the flood,
+Their flag to April’s breeze unfurled,
+Here once the embattled farmers stood,
+And fired the shot heard round the world,
+
+The foe long since in silence slept,
+Alike the Conqueror silent sleeps,
+And Time the ruined bridge has swept
+Down the dark stream which seaward creeps.
+
+On this green bank, by this soft stream,
+We set to-day a votive stone,
+That memory may their deed redeem,
+When like our sires our sons are gone.
+
+Spirit! who made those freemen dare
+To die, or leave their children free,
+Bid time and nature gently spare
+The shaft we raise to them and Thee.
+</pre>
+<address>Ralph Waldo Emerson</address>
+</article>
+ 
+
+ <a name="three"></a>
+<article>
+<header>Fable</header>
+<pre>
+The mountain and the squirrel
+Had a quarrel,
+And the former called the latter, “little prig”:
+Bun replied,
+You are doubtless very big,
+But all sorts of things and weather
+Must be taken in together
+To make up a year,
+And a sphere.
+And I think it no disgrace
+To occupy my place.
+If I’m not so large as you,
+You are not so small as I,
+And not half so spry:
+I’ll not deny you make
+A very pretty squirrel track;
+Talents differ; all is well and wisely put;
+If I cannot carry forests on my back,
+Neither can you crack a nut.
+</pre>
+<address>Ralph Waldo Emerson</address>
+</article>
+</div>
+</div>
+<script src="../anchor-trigger.js"></script>
+
+<script>
+// Same as lesson
+var ezQuery = function( query ){ return Array.prototype.slice.call( document.querySelectorAll( query ) ) }
+var pathToItem = '.nav li';
+
+var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.split( '#' ).slice(-1) } )
+
+var callback = function(obj){
+  var query = 'a[href="#'+obj.name+'"]';
+  var navItem = document.querySelector( query );
+  // callback is called only on a trigger change (onlyOnChange: true). Default behavior.
+  ezQuery( pathToItem ).map( function( li ){ li.classList.remove( 'selected' ) })
+  navItem.parentElement.classList.add('selected')
+}
+
+var aTrigger = new AnchorTrigger(anchors,callback);
+
+// Something extra to help with navigation.
+ezQuery( pathToItem + ' a' ).map( function( anchor ){ 
+	anchor.parentElement.addEventListener('click', function(){window.location = anchor.href})
+} )
+
+</script>
+</body>
+</html>

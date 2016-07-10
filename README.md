@@ -29,6 +29,7 @@ Now you want to have the current navigation item's class set to "selected". This
 ```javascript
 var ezQuery = function( query ){ return Array.prototype.slice.call( document.querySelectorAll( query ) ) }
 var pathToItem = '.nav li';
+
 var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.replace( '#', '' ) } )
 
 var callback = function(obj){

@@ -30,18 +30,18 @@ Now you want to have the current navigation item's class set to "selected". This
 var ezQuery = function( query ){ return Array.prototype.slice.call( document.querySelectorAll( query ) ) }
 var pathToItem = '.nav li';
 
-var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.replace( '#', '' ) } )
+var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.split( '#' ).slice(-1) } )
 
 var callback = function(obj){
   var query = 'a[href="#'+obj.name+'"]';
   var navItem = document.querySelector( query );
-
   // callback is called only on a trigger change (onlyOnChange: true). Default behavior.
   ezQuery( pathToItem ).map( function( li ){ li.classList.remove( 'selected' ) })
   navItem.parentElement.classList.add('selected')
 }
 
 var aTrigger = new AnchorTrigger(anchors,callback);
+
 
 ```
 

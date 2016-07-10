@@ -130,11 +130,11 @@ AnchorTrigger.prototype = {
 
 
     var offset = self.innerSizeFor[ self.flow ] * self.fraction;
-    var nav = self.elementPositions;
+    var nav = self.elementPositions
       .filter(function( element ){
           return element.cumlativePosition[ self.flow ] - offset <= self.scrollPosition[ self.flow ];
         })
-      .slice( -1 )[ 0 ]
+      .slice( -1 )[ 0 ];
     if ( self.lastAnchor !== nav.name ){
       self.lastAnchor = nav.name;
       self.calculateElementPositions();

@@ -31,7 +31,12 @@ You have in page anchor like so:
 Now you want to have the current navigation item's class set to "selected". This is how you could use this library to solve this problem
 
 ```javascript
-var ezQuery = function( query ){ return Array.prototype.slice.call( document.querySelectorAll( query ) ) }
+var ezQuery = function( query, context ){ 
+  var context = context || document;
+  result = context.querySelectorAll( query );
+  return Array.prototype.slice.call( result );
+};
+
 var pathToItem = '.nav li';
 
 var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.split( '#' ).slice(-1) } )

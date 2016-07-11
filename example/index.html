@@ -107,7 +107,12 @@ Neither can you crack a nut.
 
 <script>
 // Same as lesson
-var ezQuery = function( query ){ return Array.prototype.slice.call( document.querySelectorAll( query ) ) }
+var ezQuery = function( query, context ){ 
+  var context = context || document;
+  result = context.querySelectorAll( query );
+  return Array.prototype.slice.call( result );
+};
+
 var pathToItem = '.nav li';
 
 var anchors  = ezQuery( pathToItem + ' a' ).map( function( anchor ){ return anchor.href.split( '#' ).slice(-1) } )

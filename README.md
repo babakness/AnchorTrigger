@@ -33,7 +33,7 @@ Now you want to have the current navigation item's class set to "selected". This
 ```javascript
 var ezQuery = function( query, context ){ 
   var context = context || document;
-  result = context.querySelectorAll( query );
+  var result = context.querySelectorAll( query );
   return Array.prototype.slice.call( result );
 };
 
